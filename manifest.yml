@@ -1,0 +1,22 @@
+---
+buildpack: java-buildpack-cares
+applications: 
+- name: RabbitDemo
+  host: RabbitDemo
+  memory: 1024M
+  timeout: 120
+  instances: 1
+  path: build/libs/rabbit-demo-0.0.1-SNAPSHOT.jar
+  services:
+    #- CARES_CRE3D
+    #- cares-config
+    #- cares-registry
+    #- splunk
+    #- SystemControlDB
+    - rabbit
+domains:
+  - apps.cf.np.cahcloud.net
+env:
+  SPRING_PROFILES_ACTIVE: dev
+  #TRUST_CERTS: sg.ws.dev.cardinalhealth.net:4333
+  #JAVA_OPTS: -javaagent:"BOOT-INF/lib/spring-instrument-4.3.13.RELEASE.jar" -javaagent:"BOOT-INF/lib/aspectjweaver-1.8.13.jar" -Dnewrelic.config.app_name=CARES-ShippingService-Development -Dnewrelic.config.labels='Environment:Development;System:CARES;Cloud:AWS'
