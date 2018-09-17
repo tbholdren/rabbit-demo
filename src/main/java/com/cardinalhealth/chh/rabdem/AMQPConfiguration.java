@@ -36,9 +36,11 @@ public class AMQPConfiguration
     @Bean
     Queue queue() 
     {
-        return QueueBuilder.nonDurable(queueName)
+    	return QueueBuilder.nonDurable(queueName)
     			           .withArgument("x-dead-letter-exchange", deadLetterTopicExchangeName)
     			           .withArgument("x-dead-letter-routing-key", routingKey)
+    			           .withArgument("x-message-ttl", 10000)
+    			           .withArgument("x-max-length", 50)
     			           .build();
     }
     

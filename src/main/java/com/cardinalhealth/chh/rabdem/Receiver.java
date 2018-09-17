@@ -1,7 +1,5 @@
 package com.cardinalhealth.chh.rabdem;
 
-import java.util.concurrent.CountDownLatch;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
@@ -12,16 +10,22 @@ public class Receiver
 {
 	private static final Logger LOG = LoggerFactory.getLogger(Receiver.class);
 			
-	//private CountDownLatch latch = new CountDownLatch(1);
-
-    public void receiveMessage(String message) 
+	public void receiveMessage(String message) 
     {
         LOG.info("Received <{}>", message);
-        if (message != null && message.contains("dead-letter"))
+        if (message != null)
         {
-        	LOG.error("message contained dead-letter; throwing exception");
-        	//throw new RuntimeException("message specified to go to dead-letter");
-        	throw new AmqpRejectAndDontRequeueException("I don't like this message!");
+        	if (message.contains("reject"))
+        	{
+        		LOG.error("message contained reject; throwing reject exception");
+            	throw new AmqpRejectAndDontRequeueException("message rejected");
+        	}
+        	else if (message.contains("retry"))
+        	{
+        		LOG.error("message contained retry; throwing retry exception");
+        		throw new RuntimeException("let's re-try");
+        	}
+        	
         }
         LOG.info("message processed!");
     }
@@ -39,11 +43,5 @@ public class Receiver
     	String message = new String(chars);
     	receiveMessage(message);
     }
-
-    /*
-    public CountDownLatch getLatch() 
-    {
-        return latch;
-    }
-    */
+   
 }
