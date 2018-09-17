@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.cardinalhealth.chh.rabdem;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
