@@ -1,4 +1,4 @@
-package com.cardinalhealth.chh.rabdem;
+package com.cardinalhealth.chh.rabdem.amqp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

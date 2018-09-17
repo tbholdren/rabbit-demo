@@ -1,4 +1,4 @@
-package com.cardinalhealth.chh.rabdem;
+package com.cardinalhealth.chh.rabdem.amqp;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AMQPConfiguration
+public class RabbitConfiguration
 {
 	@Value("${rabbit-demo.amqp.cares.topicExchange.name:cares-exchange}")
 	private String topicExchangeName;
@@ -75,10 +75,7 @@ public class AMQPConfiguration
     }
     
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-            MessageListenerAdapter listenerAdapter
-            //MessageListenerAdapter forceDeadLetterListenerAdapter
-    		) 
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) 
     {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);

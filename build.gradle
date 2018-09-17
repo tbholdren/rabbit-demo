@@ -6,6 +6,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
+		//classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
@@ -19,14 +20,21 @@ group = 'com.cardinalhealth.chh.rabbitdemo'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.cloud:spring-cloud-stream-dependencies:Elmhurst.SR1'
+	}
+}
+
 repositories {
 	mavenCentral()
 }
-
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile("org.springframework.boot:spring-boot-starter-amqp")
 	compile("org.springframework.boot:spring-boot-starter-web")
+	compile 'org.springframework.cloud:spring-cloud-stream'
+	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
