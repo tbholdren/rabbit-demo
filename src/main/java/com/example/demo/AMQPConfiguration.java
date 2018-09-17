@@ -38,7 +38,7 @@ public class AMQPConfiguration
     {
         return QueueBuilder.nonDurable(queueName)
     			           .withArgument("x-dead-letter-exchange", deadLetterTopicExchangeName)
-    			           //.withArgument("x-dead-letter-routing-key", routingKey)
+    			           .withArgument("x-dead-letter-routing-key", routingKey)
     			           .build();
     }
     
