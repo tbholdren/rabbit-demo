@@ -6,7 +6,6 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		//classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
@@ -34,7 +33,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile("org.springframework.boot:spring-boot-starter-amqp")
 	compile("org.springframework.boot:spring-boot-starter-web")
-	compile 'org.springframework.cloud:spring-cloud-stream'
-	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+	compile 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

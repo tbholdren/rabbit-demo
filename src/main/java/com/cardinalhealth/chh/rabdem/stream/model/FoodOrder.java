@@ -1,4 +1,4 @@
-package com.cardinalhealth.chh.rabdem.stream;
+package com.cardinalhealth.chh.rabdem.stream.model;
 
 public class FoodOrder
 {

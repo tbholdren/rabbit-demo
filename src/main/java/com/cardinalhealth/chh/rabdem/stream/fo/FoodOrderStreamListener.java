@@ -1,4 +1,4 @@
-package com.cardinalhealth.chh.rabdem.stream;
+package com.cardinalhealth.chh.rabdem.stream.fo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +8,9 @@ import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Configuration;
 
 @EnableBinding(Sink.class)
-public class StreamConfiguration
+public class FoodOrderStreamListener
 {
-	private static final Logger LOG = LoggerFactory.getLogger(StreamConfiguration.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FoodOrderStreamListener.class);
 	
 	@StreamListener(target = Sink.INPUT)
 	public void processCheapMeals(String meal) throws Exception 

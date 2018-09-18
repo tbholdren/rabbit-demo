@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cardinalhealth.chh.rabdem.stream.fo.FoodOrderSource;
+import com.cardinalhealth.chh.rabdem.stream.ic.InsuranceCreateSource;
+import com.cardinalhealth.chh.rabdem.stream.model.FoodOrder;
+import com.cardinalhealth.chh.rabdem.stream.model.InsuranceCreate;
+
 @RestController
 @RequestMapping("/stream")
 public class StreamController
@@ -31,10 +36,10 @@ public class StreamController
     }
 	
 	@PostMapping("/insurance")
-	public String orderInsurance(@RequestBody FoodOrder foodOrder)
+	public String createInsurance(@RequestBody InsuranceCreate insuranceCreate)
 	{
-		insuranceOrderSource.insuranceOrders().send(MessageBuilder.withPayload(foodOrder).build());
-		LOG.info("insurance order: {}", foodOrder);
+		insuranceOrderSource.insuranceOrders().send(MessageBuilder.withPayload(insuranceCreate).build());
+		LOG.info("insurance order: {}", insuranceCreate);
 		return "insurance ordered!";
 	}
 }
