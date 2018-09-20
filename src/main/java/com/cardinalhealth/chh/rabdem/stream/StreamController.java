@@ -30,16 +30,18 @@ public class StreamController
 	@PostMapping("/order")
     public String orderFood(@RequestBody FoodOrder foodOrder)
 	{
+		LOG.info("sending food order to source: {}", foodOrder);
         foodOrderSource.foodOrders().send(MessageBuilder.withPayload(foodOrder).build());
-        LOG.info("order: {}", foodOrder);
+        LOG.info("sent!");
         return "food ordered!";
     }
 	
 	@PostMapping("/insurance")
 	public String createInsurance(@RequestBody InsuranceCreate insuranceCreate)
 	{
+		LOG.info("sending insurance create to source: {}", insuranceCreate);
 		insuranceOrderSource.insuranceOrders().send(MessageBuilder.withPayload(insuranceCreate).build());
-		LOG.info("insurance order: {}", insuranceCreate);
-		return "insurance ordered!";
+		LOG.info("sent!");
+		return "insurance created!";
 	}
 }

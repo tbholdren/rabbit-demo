@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 @EnableBinding(Sink.class)
 public class FoodOrderStreamListener
@@ -15,12 +16,19 @@ public class FoodOrderStreamListener
 	@StreamListener(target = Sink.INPUT)
 	public void processCheapMeals(String meal) throws Exception 
 	{
-		if(meal.contains("vegetables"))
-			throw new Exception("Vegetables! Move to dead letter queue!");
-		if(meal.contains("poison"))
-			throw new Exception("Poison! Move to dead letter queue!");
+		Assert.isTrue(!StringUtils.isEmpty(meal), "meal cannot be empty");
 		
-		LOG.info("Meal consumed: {}", meal);
+		LOG.info("received food order request: {}", meal);
+		if(meal.contains("vegetables"))
+		{
+			throw new Exception("Vegetables! Move to dead letter queue!");
+		}
+		else if(meal.contains("poison"))
+		{
+			throw new Exception("Poison! Move to dead letter queue!");
+		}
+		
+		LOG.info("processed");
 	}
 	
 }

@@ -15,11 +15,12 @@ public class InsuranceCreateStreamListener
 	@StreamListener(target = InsuranceCreateSink.INPUT)
 	public void processCheapMeals(InsuranceCreate insuranceCreate) throws Exception 
 	{
+		LOG.info("received insurance create request: {}", insuranceCreate);
 		if (insuranceCreate != null && insuranceCreate.getName() != null && insuranceCreate.getName().contains("fraud"))
 		{
 			throw new Exception("Insurance fraud found! Move to dead letter queue");
 		}
 		
-		LOG.info("insurance create processed: {}", insuranceCreate);
+		LOG.info("processed");
 	}
 }
